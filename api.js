@@ -1,6 +1,6 @@
 export function getData() {
 
-    return fetch("https://wedev-api.sky.pro/api/v1/stepan-titov/comments", {
+    return fetch("https://wedev-api.sky.pro/api/v2/stepan-titov/comments", {
         method: "GET"
     })
         .then((response) => {
@@ -10,7 +10,7 @@ export function getData() {
 };
 
 export function postData({ text, name }) {
-    return fetch("https://wedev-api.sky.pro/api/v1/stepan-titov/comments", {
+    return fetch("https://wedev-api.sky.pro/api/v2/stepan-titov/comments", {
         method: "POST",
         body: JSON.stringify({
             text: text,
