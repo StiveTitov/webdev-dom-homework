@@ -1,6 +1,15 @@
+
+
 export function render(comments) {
-    const commensHtml = comments.map((comment, index) => {
-        return `<li class="comment" data-text="${comment.textComment}" data-name="${comment.userName}">
+
+
+  const commensHtml = comments.map((comment, index) => {
+
+    return `
+    <div class="container">
+    <ul class="comments" id="list">
+    </ul>
+    <li class="comment" data-text="${comment.textComment}" data-name="${comment.userName}">
         <div class="comment-header">
           <div>${comment.userName}</div>
           <div>${comment.fullDate}</div>
@@ -14,12 +23,15 @@ export function render(comments) {
             <button data-index ="${index}" class="like-button ${comment.checkLike ? '-active-like' : ''}"></button>
           </div>
         </div>
-      </li>`
-
-    })
-        .join('');
+      </li>
+      <div class="sign">`;
 
 
-    return commensHtml;
+  })
+    .join('');
 
+
+
+
+  return commensHtml;
 };

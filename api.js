@@ -1,7 +1,21 @@
+const apiURL = "https://wedev-api.sky.pro/api/v2/stepan-titov/comments";
+const apiLogin = "https://wedev-api.sky.pro/api/user/login";
+const apiRegistration = "https://wedev-api.sky.pro/api/user";
+
+export let token;
+console.log(token);
+
+export const setToken = (newToken) => {
+    token = newToken;
+};
+
 export function getData() {
 
-    return fetch("https://wedev-api.sky.pro/api/v2/stepan-titov/comments", {
-        method: "GET"
+    return fetch(apiURL, {
+        method: "GET",
+        headers: {
+            Autorization: `Bearer ${token}`,
+        }
     })
         .then((response) => {
 
@@ -9,15 +23,42 @@ export function getData() {
         })
 };
 
-export function postData({ text, name }) {
-    return fetch("https://wedev-api.sky.pro/api/v2/stepan-titov/comments", {
+export function postData({ text }) {
+    return fetch(apiURL, {
         method: "POST",
         body: JSON.stringify({
             text: text,
-            name: name,
-            forceError: true //Согласно документации POST-запрос будет в половине случаев отвечать 500-й ошибкой
+            //name: name,
+            //forceError: true //Согласно документации POST-запрос будет в половине случаев отвечать 500-й ошибкой
             //добавлено для домашки 2.14.
         }),
-
+        headers: {
+            Autorization: `Bearer ${token}`,
+        }
     })
 };
+
+export function login({ login, password }) {
+    return fetch(apiLogin, {
+        method: "POST",
+        body: JSON.stringify({
+            login: login,
+            password: password
+        }),
+    }).then((response) => {
+        return response.json();
+    })
+}
+
+export function regisreation({ login, name, password }) {
+    return fetch(apiRegistration, {
+        method: "POST",
+        body: JSON.stringify({
+            login: login,
+            name: name,
+            password: password,
+        }),
+    }).then((response) => {
+        return response.json();
+    })
+}
