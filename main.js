@@ -121,7 +121,7 @@ export const renderComments = () => { // Функция рендеринга с�
 
             postData({
                 text: sanitizeHtml(commentInputElement.value),
-                name: sanitizeHtml(nameInputElement.value),
+                //name: sanitizeHtml(nameInputElement.value),
             }).then((response) => {
                 console.log("Время:" + (Date.now() - startAt));
                 return response;
