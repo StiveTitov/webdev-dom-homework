@@ -1,38 +1,44 @@
-import { login, setToken, token, setUserName, userName } from "./api.js";
+import { regisreation, setToken, token, setUserName, userName } from "./api.js";
+import { login } from "./api.js";
 import { renderComments } from "./main.js";
 import { apiGet } from "./main.js";
-import { renderRegistration } from "./registratonPage.js"
+import { renderLogin } from "./loginPage.js"
 
 
 
-export const renderLogin = () => {
+
+
+export const renderRegistration = () => {
     const appElement = document.getElementById("app");
-    const loginHtml = `
+    const RegistrationHtml = `
     <div class="container">
         <ul class="comments" id="list">
 
             <div class="add-form">
-                <p>Форма входа</p>
+                <p>Форма регистрации</p>
+                <input type="text" class="add-form-login" id="name-input" placeholder="Введите имя" />
                 <input type="text" class="add-form-login" id="login-input" placeholder="Введите логин" />
                 <input type="text" class="add-form-login" id="password-input" placeholder="Введите пароль" />
                 <div class="add-form-row">
-                    <button class="add-form-button" id="login-button">Войти</button>
+                    <button class="add-form-button" id="registration-button">Зарегистрироваться</button>
                 </div>
                 <div>
-                <p class="sign__autorization" id="registration-page">Зарегистрироваться</p>
+                <p class="sign__autorization" id="login-page">Войти</p>
                 </div>
             </div>
     </div>
     `;
-    appElement.innerHTML = loginHtml;
+    appElement.innerHTML = RegistrationHtml;
 
-    const buttonElement = document.getElementById("login-button");
+    const buttonElement = document.getElementById("registration-button");
+    const nameInputElement = document.getElementById("name-input");
     const loginInputElement = document.getElementById("login-input");
     const passwordInputElement = document.getElementById("password-input");
-    const regisreationElement = document.getElementById("registration-page");
+    const loginPageElement = document.getElementById("login-page");
 
     buttonElement.addEventListener("click", () => {
-        login({
+        regisreation({
+            name: nameInputElement.value,
             login: loginInputElement.value,
             password: passwordInputElement.value,
         }).then((responseData) => {
@@ -46,7 +52,8 @@ export const renderLogin = () => {
         renderComments();
     });
 
-    regisreationElement.addEventListener("click", () => {
-        renderRegistration();
+
+    loginPageElement.addEventListener("click", () => {
+        renderLogin();
     });
 };

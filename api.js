@@ -3,10 +3,15 @@ const apiLogin = "https://wedev-api.sky.pro/api/user/login";
 const apiRegistration = "https://wedev-api.sky.pro/api/user";
 
 export let token;
+export let userName;
 console.log(token);
 
 export const setToken = (newToken) => {
     token = newToken;
+};
+
+export const setUserName = (newUserName) => {
+    userName = newUserName;
 };
 
 export function getData() {
