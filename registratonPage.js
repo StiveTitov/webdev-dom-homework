@@ -16,9 +16,11 @@ export const renderRegistration = () => {
 
             <div class="add-form">
                 <p>Форма регистрации</p>
+                <div class="input-data">
                 <input type="text" class="add-form-login" id="name-input" placeholder="Введите имя" />
                 <input type="text" class="add-form-login" id="login-input" placeholder="Введите логин" />
                 <input type="text" class="add-form-login" id="password-input" placeholder="Введите пароль" />
+                </div>
                 <div class="add-form-row">
                     <button class="add-form-button" id="registration-button">Зарегистрироваться</button>
                 </div>

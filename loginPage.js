@@ -13,8 +13,10 @@ export const renderLogin = () => {
 
             <div class="add-form">
                 <p>Форма входа</p>
+                <div class="input-data">
                 <input type="text" class="add-form-login" id="login-input" placeholder="Введите логин" />
                 <input type="text" class="add-form-login" id="password-input" placeholder="Введите пароль" />
+                </div>
                 <div class="add-form-row">
                     <button class="add-form-button" id="login-button">Войти</button>
                 </div>

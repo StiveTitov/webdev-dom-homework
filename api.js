@@ -19,7 +19,7 @@ export function getData() {
     return fetch(apiURL, {
         method: "GET",
         headers: {
-            Autorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         }
     })
         .then((response) => {
@@ -38,7 +38,7 @@ export function postData({ text }) {
             //добавлено для домашки 2.14.
         }),
         headers: {
-            Autorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         }
     })
 };
