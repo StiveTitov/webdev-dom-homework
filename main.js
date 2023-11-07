@@ -4,6 +4,7 @@ import { render } from "./render.js";
 import { fullDate } from "./fullDate.js";
 import { renderLogin } from "./loginPage.js";
 import { token, userName } from "./api.js";
+import { sanitizeHtml } from "./sanitizeHtml.js"
 
 // Код писать здесь
 //const buttonElement = document.getElementById("add-button");
@@ -88,10 +89,7 @@ export const renderComments = () => { // Функция рендеринга с�
             nameInputElement.classList.remove('error');
             commentInputElement.classList.remove('error');
             // 6. Чтение значения атрибутов HTML элементов;
-            //if (nameInputElement.value === '' || nameInputElement.value === 'Введите ваше имя') {
-            //  nameInputElement.classList.add('error');
-            //return;
-            // }
+
             if (commentInputElement.value === '' || commentInputElement.value === 'Введите ваш коментарий') {//Проверка на корректность ввода данных в форму (валидация)
                 commentInputElement.classList.add('error');// И подсветить флорму красным цветом
                 return;
@@ -99,12 +97,12 @@ export const renderComments = () => { // Функция рендеринга с�
 
 
 
-            const sanitizeHtml = (htmlString) => {
-                return htmlString.replaceAll("&", "&amp;")// обязательно начинать обработку с "&", "&amp;"! иначе  при символе "<" будет выводиться "&lt;" и т.д.
-                    .replaceAll("<", "&lt;")// элементарная обработка пользовательского ввода на предмет
-                    .replaceAll(">", "&gt;") // всяких нехороших вещей в HTML-коде, в данном случае управляющие символы разметки "<" и ">"
-                    .replaceAll('"', "&quot;");// меняются; на их коды, а браузер всёравно выводит эти символы
-            };
+            //const sanitizeHtml = (htmlString) => {
+            //   return htmlString.replaceAll("&", "&amp;")// обязательно начинать обработку с "&", "&amp;"! иначе  при символе "<" будет выводиться "&lt;" и т.д.
+            //       .replaceAll("<", "&lt;")// элементарная обработка пользовательского ввода на предмет
+            //       .replaceAll(">", "&gt;") // всяких нехороших вещей в HTML-коде, в данном случае управляющие символы разметки "<" и ">"
+            //       .replaceAll('"', "&quot;");// меняются; на их коды, а браузер всёравно выводит эти символы
+            // };
 
             const startAt = Date.now();
             console.log("Начинаю делать запрос");
@@ -120,8 +118,9 @@ export const renderComments = () => { // Функция рендеринга с�
 
 
             postData({
+
                 text: sanitizeHtml(commentInputElement.value),
-                //name: sanitizeHtml(nameInputElement.value),
+
             }).then((response) => {
                 console.log("Время:" + (Date.now() - startAt));
                 return response;
@@ -158,25 +157,27 @@ export const renderComments = () => { // Функция рендеринга с�
 
             nameInputElement.value = '';// Очиска формы имени после ввода данных
             commentInputElement.value = '';// Очиска формы коментария после ввода данных
-            // renderComments();
+
         });
 
-    };
+        const commentsElements = document.querySelectorAll(".comment");
+        for (const comment of commentsElements) {
+            comment.addEventListener('click', () => {
+                event.stopPropagation();//Отключение дочерних событий
+                const dataComment = comment.dataset.text;
+                const dataName = comment.dataset.name;
 
 
 
-    const commentsElements = document.querySelectorAll(".comment");
-    for (const comment of commentsElements) {
-        comment.addEventListener('click', () => {
-            event.stopPropagation();//Отключение дочерних событий
-            const dataComment = comment.dataset.text;
-            const dataName = comment.dataset.name;
+                commentInputElement.value = `> ${dataComment}\n\n${dataName}`;
+                console.log(`> ${dataComment}\n\n${dataName}`);
+            });
+
+        };
 
 
 
-            commentInputElement.value = `> ${dataComment}\n\n${dataName}`;
-            console.log(`> ${dataComment}\n\n${dataName}`);
-        });
+
 
     };
     const loginElements = document.querySelectorAll(".sign__autorization");

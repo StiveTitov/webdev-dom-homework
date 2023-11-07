@@ -2,6 +2,7 @@ import { login, setToken, token, setUserName, userName } from "./api.js";
 import { renderComments } from "./main.js";
 import { apiGet } from "./main.js";
 import { renderRegistration } from "./registratonPage.js"
+import { sanitizeHtml } from "./sanitizeHtml.js"
 
 
 
@@ -34,8 +35,16 @@ export const renderLogin = () => {
     const regisreationElement = document.getElementById("registration-page");
 
     buttonElement.addEventListener("click", () => {
+        if (loginInputElement.value === '' || loginInputElement.value === 'Введите логин') {//Проверка на корректность ввода данных в форму (валидация)
+            loginInputElement.classList.add('error');// И подсветить флорму красным цветом
+            return;
+        }
+        if (passwordInputElement.value === '' || passwordInputElement.value === 'Введите пароль') {//Проверка на корректность ввода данных в форму (валидация)
+            passwordInputElement.classList.add('error');// И подсветить флорму красным цветом
+            return;
+        }
         login({
-            login: loginInputElement.value,
+            login: sanitizeHtml(loginInputElement.value),
             password: passwordInputElement.value,
         }).then((responseData) => {
 
@@ -44,6 +53,8 @@ export const renderLogin = () => {
             setUserName(responseData.user.name);
             console.log(userName);
         });
+
+        
         apiGet();
         renderComments();
     });

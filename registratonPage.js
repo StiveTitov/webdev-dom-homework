@@ -1,8 +1,8 @@
 import { regisreation, setToken, token, setUserName, userName } from "./api.js";
-import { login } from "./api.js";
 import { renderComments } from "./main.js";
 import { apiGet } from "./main.js";
 import { renderLogin } from "./loginPage.js"
+import { sanitizeHtml } from "./sanitizeHtml.js"
 
 
 
@@ -39,10 +39,27 @@ export const renderRegistration = () => {
     const loginPageElement = document.getElementById("login-page");
 
     buttonElement.addEventListener("click", () => {
+
+        if (nameInputElement.value === '' || nameInputElement.value === 'Введите имя') {//Проверка на корректность ввода данных в форму (валидация)
+            nameInputElement.classList.add('error');// И подсветить флорму красным цветом
+            return;
+        }
+        if (loginInputElement.value === '' || loginInputElement.value === 'Введите логин') {//Проверка на корректность ввода данных в форму (валидация)
+            loginInputElement.classList.add('error');// И подсветить флорму красным цветом
+            return;
+        }
+        if (passwordInputElement.value === '' || passwordInputElement.value === 'Введите пароль') {//Проверка на корректность ввода данных в форму (валидация)
+            passwordInputElement.classList.add('error');// И подсветить флорму красным цветом
+            return;
+        }
+
         regisreation({
-            name: nameInputElement.value,
-            login: loginInputElement.value,
+            name: sanitizeHtml(nameInputElement.value),
+            login: sanitizeHtml(loginInputElement.value),
             password: passwordInputElement.value,
+
+
+
         }).then((responseData) => {
 
             setToken(responseData.user.token);
