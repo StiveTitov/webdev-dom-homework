@@ -1,3 +1,5 @@
+import { renderLogin } from "./loginPage.js"
+
 const apiURL = "https://wedev-api.sky.pro/api/v2/stepan-titov/comments";
 const apiLogin = "https://wedev-api.sky.pro/api/user/login";
 const apiRegistration = "https://wedev-api.sky.pro/api/user";
@@ -50,10 +52,20 @@ export function login({ login, password }) {
             login: login,
             password: password
         }),
-    }).then((response) => {
-        return response.json();
     })
-}
+        .then((response) => {
+            console.log(response);
+            if (response.status === 400) {
+                throw new Error("Неправильный логин или пароль");
+            } else {
+                console.log(response);
+                return response.json();
+            }
+
+
+        })
+        
+};
 
 export function regisreation({ login, name, password }) {
     return fetch(apiRegistration, {

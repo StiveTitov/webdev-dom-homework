@@ -46,34 +46,27 @@ export const renderLogin = () => {
         login({
             login: sanitizeHtml(loginInputElement.value),
             password: passwordInputElement.value,
-        }).then((response) => {
-
-            setToken(response.user.token);
-            console.log(token);
-            setUserName(response.user.name);
-            console.log(userName);
-        }).then((response) => {
-
-            if (response.status === 201) {
-
-                return response.json();
-            } else if (response.status === 400) {
-                return Promise.reject("Неправильный логин или пароль");
-            } else {
-                // Код который обрабатывает ошибку
-                throw new Error("Сервер упал");
-                return Promise.reject("Сервер упал");
-
-            }
-        }).catch((error) => {// Обработчик ошибок
-            console.warn(error);
-            //error === "Неправильный логин или пароль" ? alert("Неправильный логин или пароль") : alert("Что-то пошло не так, попробуйте отправить коментарий позже");
-            return;
 
         })
-        apiGet();
-        renderComments();
+            .catch((error) => {// Обработчик ошибок
+                console.warn(error);
+                alert("Неправильный логин или пароль");
+                renderLogin();
+
+            })
+            .then((response) => {
+                setToken(response.user.token);
+                console.log(token);
+                setUserName(response.user.name);
+                console.log(userName);
+
+                apiGet();
+                renderComments();
+
+            })
+
     });
+
 
     regisreationElement.addEventListener("click", () => {
         renderRegistration();
