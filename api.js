@@ -64,7 +64,7 @@ export function login({ login, password }) {
 
 
         })
-        
+
 };
 
 export function regisreation({ login, name, password }) {
@@ -75,7 +75,14 @@ export function regisreation({ login, name, password }) {
             name: name,
             password: password,
         }),
-    }).then((response) => {
-        return response.json();
     })
-}
+        .then((response) => {
+            console.log(response);
+            if (response.status === 400) {
+                throw new Error("Пользователь с таким логином уже сущетсвует");
+            } else {
+                console.log(response);
+                return response.json();
+            }
+        })
+};
