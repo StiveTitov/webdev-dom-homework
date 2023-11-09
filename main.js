@@ -51,6 +51,7 @@ let comments = []; // Массив где будут хранится данны
 
 export const renderComments = () => { // Функция рендеринга страницы
     const appElement = document.getElementById("app");
+
     const renderHtml = render(comments); // получаем разметку из модуля render.js
 
 
@@ -72,7 +73,7 @@ export const renderComments = () => { // Функция рендеринга с�
         <button class="add-form-button" id="add-button">Написать</button>
        </div>
      </div>
-         `
+         `;
         const buttonElement = document.getElementById("add-button");
         const listElement = document.getElementById("list");
         const nameInputElement = document.getElementById("name-input");
@@ -176,6 +177,7 @@ export const renderComments = () => { // Функция рендеринга с�
             renderLogin();
         });
     };
+
 };
 renderComments(); // Вызываем функцию рендеринга страницы
 
@@ -184,20 +186,24 @@ renderComments(); // Вызываем функцию рендеринга стр
 
 
 const likeButtons = () => { //Функция обработки клика по лайкам
+
     const buttonLikes = document.querySelectorAll(".like-button");
     for (const buttonLike of buttonLikes) {
         buttonLike.addEventListener("click", () => {
-            event.stopPropagation();//Отключение дочерних событий
-            if (comments[buttonLike.dataset.index].checkLike === true) {
-                comments[buttonLike.dataset.index].checkLike = false;
-                comments[buttonLike.dataset.index].countLikes--;
-            } else {
-                comments[buttonLike.dataset.index].checkLike = true;
-                comments[buttonLike.dataset.index].countLikes++;
-            }
 
-            renderComments(); // Вызываем функцию рендеринга страницы
-            likeButtons(); //Вызываем функцию обработки клика по лайкам
+            event.stopPropagation();//Отключение дочерних событий
+            if (token !== undefined) {
+                if (comments[buttonLike.dataset.index].checkLike === true) {
+                    comments[buttonLike.dataset.index].checkLike = false;
+                    comments[buttonLike.dataset.index].countLikes--;
+                } else {
+                    comments[buttonLike.dataset.index].checkLike = true;
+                    comments[buttonLike.dataset.index].countLikes++;
+                }
+
+                renderComments(); // Вызываем функцию рендеринга страницы
+                likeButtons(); //Вызываем функцию обработки клика по лайкам
+            } else return;
         });
     }
 };
