@@ -80,9 +80,7 @@ export const renderComments = () => { // Функция рендеринга с�
         const listElement = document.getElementById("list");
         const nameInputElement = document.getElementById("name-input");
         const commentInputElement = document.getElementById("comment-input");
-        //buttonElement.disabled = true;// Выключаем кнопку добавления коментария 
-        //пока коментарии добавляются на страницу
-        //buttonElement.textContent = 'Данные загружаются...';// Меняем название кнопки
+        
 
         buttonElement.addEventListener('click', () => {
 
