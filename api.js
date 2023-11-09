@@ -1,15 +1,20 @@
-import { renderLogin } from "./loginPage.js"
+
 
 const apiURL = "https://wedev-api.sky.pro/api/v2/stepan-titov/comments";
 const apiLogin = "https://wedev-api.sky.pro/api/user/login";
 const apiRegistration = "https://wedev-api.sky.pro/api/user";
 
 export let token;
+export let idCommit;
 export let userName;
 console.log(token);
 
 export const setToken = (newToken) => {
     token = newToken;
+};
+
+export const setIDCommit = (newIDCommit) => {
+    idCommit = newIDCommit;
 };
 
 export const setUserName = (newUserName) => {

@@ -1,4 +1,4 @@
-import { login, setToken, token, setUserName, userName } from "./api.js";
+import { login, setToken, token, setUserName, userName, idCommit, setIDCommit } from "./api.js";
 import { renderComments } from "./main.js";
 import { apiGet } from "./main.js";
 import { renderRegistration } from "./registratonPage.js"
@@ -59,6 +59,8 @@ export const renderLogin = () => {
                 console.log(token);
                 setUserName(response.user.name);
                 console.log(userName);
+                setIDCommit(response.user._id)
+                console.log(idCommit);
 
                 apiGet();
                 renderComments();

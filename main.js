@@ -7,10 +7,7 @@ import { token, userName } from "./api.js";
 import { sanitizeHtml } from "./sanitizeHtml.js"
 
 // Код писать здесь
-//const buttonElement = document.getElementById("add-button");
-//const listElement = document.getElementById("list");
-//const nameInputElement = document.getElementById("name-input");
-//const commentInputElement = document.getElementById("comment-input");
+
 const startAt = Date.now();
 const commentContainer = {};
 
@@ -53,17 +50,17 @@ let comments = []; // Массив где будут хранится данны
 
 
 export const renderComments = () => { // Функция рендеринга страницы
+    const appElement = document.getElementById("app");
     const renderHtml = render(comments); // получаем разметку из модуля render.js
 
 
-    const appElement = document.getElementById("app");
 
-    //appElement.innerHTML = renderHtml; // отрисовываем страничку целиком из полученых данных
+
 
     if (token == undefined) {
         appElement.innerHTML = `
     ${renderHtml}
-    <p>Чтобы добавить коментарий, <span class="sign__autorization">авторизуйтесь</span></p>
+    <div><p>Чтобы добавить коментарий, <span class="sign__autorization">авторизуйтесь</span></p>
     </div>`} else {
         appElement.innerHTML = `
     ${renderHtml}
@@ -80,7 +77,7 @@ export const renderComments = () => { // Функция рендеринга с�
         const listElement = document.getElementById("list");
         const nameInputElement = document.getElementById("name-input");
         const commentInputElement = document.getElementById("comment-input");
-        
+
 
         buttonElement.addEventListener('click', () => {
 
@@ -95,7 +92,7 @@ export const renderComments = () => { // Функция рендеринга с�
 
 
 
-            
+
             const startAt = Date.now();
             console.log("Начинаю делать запрос");
 
