@@ -192,7 +192,7 @@ const likeButtons = () => { //Функция обработки клика по 
         buttonLike.addEventListener("click", () => {
 
             event.stopPropagation();//Отключение дочерних событий
-            if (token !== undefined) {
+            if (token !== undefined) {// Отключение лайка если нет авторизации
                 if (comments[buttonLike.dataset.index].checkLike === true) {
                     comments[buttonLike.dataset.index].checkLike = false;
                     comments[buttonLike.dataset.index].countLikes--;
