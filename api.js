@@ -1,6 +1,6 @@
 
 
-const apiURL = "https://wedev-api.sky.pro/api/v2/stepan-titov/comments";
+const apiURL = "https://wedev-api.sky.pro/api/v2/stepan-titov2/comments";
 const apiLogin = "https://wedev-api.sky.pro/api/user/login";
 const apiRegistration = "https://wedev-api.sky.pro/api/user";
 
@@ -48,6 +48,7 @@ export function postData({ text }) {
             Authorization: `Bearer ${token}`,
         }
     })
+
 };
 
 export function login({ login, password }) {

@@ -98,7 +98,9 @@ export const renderComments = () => { // Функция рендеринга с�
             console.log("Начинаю делать запрос");
 
             commentContainer.name = nameInputElement.value;//сохраняем имя коментатора на случай ошибки 
-            commentContainer.text = commentInputElement.value;//сохраняем коментарий на случай ошибки
+            //commentContainer.text = commentInputElement.value;//сохраняем коментарий на случай ошибки
+
+            let commentContainerText = commentInputElement.value;
 
             buttonElement.disabled = true;// Выключаем кнопку добавления комментария
             buttonElement.textContent = 'Коментарий добавляется...';// Меняем надпись кнопки
@@ -140,7 +142,7 @@ export const renderComments = () => { // Функция рендеринга с�
                 .catch((error) => {// Обработчик ошибок
                     console.warn(error);
                     error === "Короткое имя" ? alert("Имя должно содержать хотя бы три символа") : alert("Что-то пошло не так, попробуйте отправить коментарий позже");
-                    return renderError();// вызываем функцию обработки ошибок связанных с работой API
+                    return renderError(commentContainerText);// вызываем функцию обработки ошибок связанных с работой API
 
                 })
 
@@ -208,13 +210,16 @@ const likeButtons = () => { //Функция обработки клика по 
     }
 };
 
-const renderError = () => {// Функция обработки ошибок запрса
+const renderError = (commentContainerText) => {// Функция обработки ошибок запрса
+    const buttonElement = document.getElementById("add-button");
+    const nameInputElement = document.getElementById("name-input");
+    const commentInputElement = document.getElementById("comment-input");
     buttonElement.disabled = false;// Включаем кнопку добавления комментария
     buttonElement.textContent = 'Написать';// И меняем надпись обратно
     nameInputElement.value = `${commentContainer.name}`;
-    commentInputElement.value = `${commentContainer.text}`;
-    renderComments(); // Вызываем функцию рендеринга страницы
-    likeButtons(); //Вызываем функцию обработки клика по лайкам
+    commentInputElement.value = commentContainerText;
+    //renderComments(); // Вызываем функцию рендеринга страницы
+    //likeButtons(); //Вызываем функцию обработки клика по лайкам
 };
 
 
