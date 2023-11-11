@@ -1,6 +1,6 @@
 
 
-const apiURL = "https://wedev-api.sky.pro/api/v2/stepan-titov2/comments";
+const apiURL = "https://wedev-api.sky.pro/api/v2/stepan-titov1/comments";
 const apiLogin = "https://wedev-api.sky.pro/api/user/login";
 const apiRegistration = "https://wedev-api.sky.pro/api/user";
 
