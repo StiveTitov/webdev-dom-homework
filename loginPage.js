@@ -48,12 +48,8 @@ export const renderLogin = () => {
             password: passwordInputElement.value,
 
         })
-            .catch((error) => {// Обработчик ошибок
-                console.warn(error);
-                alert("Неправильный логин или пароль");
-                renderLogin();
 
-            })
+
             .then((response) => {
                 setToken(response.user.token);
                 console.log(token);
@@ -64,6 +60,12 @@ export const renderLogin = () => {
 
                 apiGet();
                 renderComments();
+            })
+            .catch((error) => {// Обработчик ошибок
+                console.warn(error);
+                alert("Неправильный логин или пароль");
+
+                return renderLogin();
 
             })
 

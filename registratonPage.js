@@ -61,21 +61,23 @@ export const renderRegistration = () => {
 
 
         })
-        .catch((error) => {// Обработчик ошибок
-            console.warn(error);
-            alert("Пользователь с таким логином уже сущетсвует");
-            renderRegistration();
-        })
-        .then((responseData) => {
+            .then((responseData) => {
 
-            setToken(responseData.user.token);
-            console.log(token);
-            setUserName(responseData.user.name);
-            console.log(userName);
-        apiGet();
-        renderComments();
-        });
-        
+                setToken(responseData.user.token);
+                console.log(token);
+                setUserName(responseData.user.name);
+                console.log(userName);
+                apiGet();
+                renderComments();
+
+            })
+
+            .catch((error) => {// Обработчик ошибок
+                console.warn(error);
+                alert("Пользователь с таким логином уже сущетсвует");
+                renderRegistration();
+            });
+
     });
 
 

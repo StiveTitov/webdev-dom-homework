@@ -1,6 +1,6 @@
 
 
-const apiURL = "https://wedev-api.sky.pro/api/v2/stepan-titov1/comments";
+const apiURL = "https://wedev-api.sky.pro/api/v2/stepan-titov3/comments";
 const apiLogin = "https://wedev-api.sky.pro/api/user/login";
 const apiRegistration = "https://wedev-api.sky.pro/api/user";
 
@@ -48,7 +48,20 @@ export function postData({ text }) {
             Authorization: `Bearer ${token}`,
         }
     })
+        .then((response) => {
+            console.log(response);
+            // Код который обрабатывает ошибку
+            //throw new Error("Сервер упал");- был в уроке
+            if (response.status === 400) {
+                throw new Error("Текст коментария короче трех символов");
 
+            } else if (response.status === 500) {
+                throw new Error("Сервер упал");
+            } else {
+
+                return response.json();
+            }
+        })
 };
 
 export function login({ login, password }) {
