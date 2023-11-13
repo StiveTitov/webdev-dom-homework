@@ -1,15 +1,18 @@
 "use strict";
 import { getData, postData } from "./api.js";
 import { render } from "./render.js";
-import { fullDate } from "./fullDate.js";
+//import { fullDate } from "./fullDate.js";
 import { renderLogin } from "./loginPage.js";
 import { token, userName } from "./api.js";
 import { sanitizeHtml } from "./sanitizeHtml.js"
+import {format} from 'date-fns';
+
 
 // Код писать здесь
 
 const startAt = Date.now();
 const commentContainer = {};
+
 
 
 
@@ -27,8 +30,9 @@ export const apiGet = () => {
                 textComment: comment.text,
                 countLikes: comment.likes,
                 // длинная строка ниже- это преобразование даты, полученной с сервера для нормального отображения
-                fullDate: new Date(comment.date).toLocaleDateString() + " " + (new Date(comment.date).getHours() < 10 ? '0' + new Date(comment.date).getHours() : new Date(comment.date).getHours()) + ":" + (new Date(comment.date).getMinutes() < 10 ? '0' + new Date(comment.date).getMinutes() : new Date(comment.date).getMinutes()) + ":" + (new Date(comment.date).getSeconds() < 10 ? '0' + new Date(comment.date).getSeconds() : new Date(comment.date).getSeconds()),
-
+                //fullDate: new Date(comment.date).toLocaleDateString() + " " + (new Date(comment.date).getHours() < 10 ? '0' + new Date(comment.date).getHours() : new Date(comment.date).getHours()) + ":" + (new Date(comment.date).getMinutes() < 10 ? '0' + new Date(comment.date).getMinutes() : new Date(comment.date).getMinutes()) + ":" + (new Date(comment.date).getSeconds() < 10 ? '0' + new Date(comment.date).getSeconds() : new Date(comment.date).getSeconds()),
+                
+                fullDate: format(new Date(comment.date), 'yyyy-MM-dd hh.mm.ss')
             };
         });
         comments = fromApp;

@@ -1,4 +1,6 @@
-export function fullDate() {
+
+export function fullDate(data) {
+    
 
     let newDate = new Date();
     let date = newDate.getDate();
@@ -19,6 +21,7 @@ export function fullDate() {
     if (minute < 10) { // если минут будет меньше 10,
         minute = "0" + minute; // то перед ними поставим 0
     }
-    //Функция fullDate возвращает текущую дату и время: 
+    Функция fullDate возвращает текущую дату и время: 
     return date + "." + month + "." + year + " " + hour + ":" + minute;
+    
 };
