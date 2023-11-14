@@ -62,8 +62,11 @@ export const renderLogin = () => {
                 renderComments();
             })
             .catch((error) => {// Обработчик ошибок
-                console.warn(error);
-                alert("Неправильный логин или пароль");
+                console.log(error);
+                               
+                error == "Error: Неправильный логин или пароль"
+                        ? alert("Неправильный логин или пароль")
+                        : alert("Что-то пошло не так, попробуйте отправить коментарий позже");
 
                 return renderLogin();
 

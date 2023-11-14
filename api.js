@@ -74,16 +74,23 @@ export function login({ login, password }) {
     })
         .then((response) => {
             console.log(response);
-            if (response.status === 400) {
-                throw new Error("Неправильный логин или пароль");
-            } else {
+            if (response.status === 201) {
                 console.log(response);
                 return response.json();
+            } else if (response.status === 400) {
+                throw new Error("Неправильный логин или пароль");
+            } else if (response.status === 500) {
+                throw new Error("Сервер упал");
+            } else {
+                throw new Error("Что-то пошло не так, попробуйте зарегистрироваться позже");
             }
-
-
         })
-
+        //.catch((error) => {// Обработчик ошибок
+         //   console.warn(error);
+         //   error = "Неправильный логин или пароль"
+         //               ? alert("Неправильный логин или пароль")
+          //              : alert("Что-то пошло не так, попробуйте отправить коментарий позже");
+        //})
 };
 
 export function regisreation({ login, name, password }) {
