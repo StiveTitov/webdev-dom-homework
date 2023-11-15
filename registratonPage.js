@@ -1,9 +1,10 @@
+
 import { regisreation, setToken, token, setUserName, userName } from "./api.js";
 import { renderComments } from "./main.js";
 import { apiGet } from "./main.js";
 import { renderLogin } from "./loginPage.js"
 import { sanitizeHtml } from "./sanitizeHtml.js"
-
+import _ from 'lodash';
 
 
 
@@ -54,7 +55,8 @@ export const renderRegistration = () => {
         }
 
         regisreation({
-            name: sanitizeHtml(nameInputElement.value),
+            name: _.capitalize(nameInputElement.value),
+            //name: sanitizeHtml(nameInputElement.value),
             login: sanitizeHtml(loginInputElement.value),
             password: passwordInputElement.value,
 
